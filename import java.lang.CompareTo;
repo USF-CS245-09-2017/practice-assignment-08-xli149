@@ -1,0 +1,95 @@
+import java.lang.CompareTo;
+public class BST{
+	public BSTNode root;
+	public boolean find(Comparable value){
+		return find(root, value);
+	}
+	private boolean find(BSTNode node, Comparable value){
+		if(node == null)
+			return false;
+		if(node.data.CompareTo(value) == 0){
+			return true;
+		}
+		else if(node.data.CompareTo(value) > 0){
+			return find(node.right, value);
+		}
+		else if(node.data.CompareTo(value) < 0){
+			return find(node.left, value);
+		}
+	}
+	public void insert(Comparable value){
+		root = insert(root, value);
+	}
+	private BSTNode insert(BSTNode node, Comparable value){
+		if(node == null){
+			BSTNode newNode = new BSTNode(value);
+			return newNode;
+		}
+		else if(node.data.CompareTo(value) > 0){
+			node.right = insert(node.right, value);
+		}
+		else if(node.data.CompareTo(value) < 0){
+			node.left = insert(node.left, value);
+		}
+	}
+	private void print(BSTNode node){
+		if(node != null){
+			print(node.left);
+			System.out.println(node.data);
+			print(node.right);
+		}
+	}
+	BSTNode delete(BSTNode node, Comparable value){
+		if(node == null){
+			return null;
+		}
+		if(node.data.CompareTo(value) == 0){
+			if(node.left == null){
+				return node.right;
+			}
+		
+			else if(node.right == null){
+				return node.left;
+			}
+			else if(node.right.left == null){
+				node.data = node.right.data;
+				node.right = node.right.right;
+				return node;
+			}
+			else{
+				node.data = removeSmallest(node.right);
+				return node;
+			}
+		}
+		else if(node.data.CompareTo(value) > 0){
+			node.right = delete(node.left, value);
+		}
+		else{
+			delete(node.right, value);
+		}
+	}
+	Comparable removeSmallest(BSTNode node){
+		if(node.left.left == null){
+			Comparable smallest = node.left.data;
+			node.left = node.left.right;
+			return smallest;
+		}
+		else{
+			return removeSmallest(node, left);
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
