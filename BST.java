@@ -17,7 +17,7 @@ public class BST<T>{
 		if(node.data.compareTo(value) == 0){
 			return true;
 		}
-		else if(node.data.compareTo(value) > 0){
+		else if(node.data.compareTo(value) < 0){
 			return find(node.right, value);
 		}
 		else {
@@ -36,10 +36,10 @@ public class BST<T>{
 			BSTNode newNode = new BSTNode(value);
 			return newNode;
 		}
-		else if(node.data.compareTo(value) > 0){
+		else if(node.data.compareTo(value) < 0){
 			node.right = insert(node.right, value);
 		}
-		else if(node.data.compareTo(value) < 0){
+		else if(node.data.compareTo(value) > 0){
 			node.left = insert(node.left, value);
 		}
 		return node;
@@ -87,7 +87,7 @@ public class BST<T>{
 				return node;
 			}
 		}
-		else if(node.data.compareTo(value) < 0){
+		else if(node.data.compareTo(value) > 0){
 			node.right = delete(node.left, value);
 		}
 		else{
